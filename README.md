@@ -1,61 +1,83 @@
-# Fraud Detection in Credit Card Transactions
+# Hotel Booking Cancellation Prediction
 
-## Overview
-This project focuses on detecting fraudulent credit card transactions using machine learning techniques. The dataset used contains transactions made by European cardholders in September 2013. The dataset is highly imbalanced, with only 0.17% of transactions being fraudulent.
+This project aims to predict hotel booking cancellations using machine learning techniques. The dataset contains records of hotel bookings, including customer details, booking information, and stay details. The target variable is `is_canceled`, which indicates whether a booking was canceled or not.
 
-## Key Features
-- **Exploratory Data Analysis (EDA)**: Insights into the dataset, including class distribution, correlation analysis, and temporal patterns.
-- **Feature Engineering**: Creation of new features such as the hour of the day and fraud aggregation by time.
-- **Data Preprocessing**: Handling class imbalance using SMOTE and applying standard scaling for normalization.
-- **Model Training and Evaluation**: Comparison of three models - Logistic Regression, Random Forest, and Gradient Boosting - to identify the best-performing model.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Dataset](#dataset)
+- [Project Workflow](#project-workflow)
+- [Models and Evaluation](#models-and-evaluation)
+- [Key Insights](#key-insights)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Results
-- The **Random Forest** model achieved the best performance with the highest accuracy, precision, recall, and F1 score.
-- Evaluation metrics and confusion matrices were used to assess model performance.
+## Project Overview
+The goal of this project is to build a machine learning model to predict cancellations, enabling hotels to optimize their operations and revenue management. The project includes data preprocessing, feature engineering, model training, and evaluation.
+
+## Dataset
+- **Source**: [Kaggle - Hotel Booking Demand Dataset](https://www.kaggle.com/jessemostipak/hotel-booking-demand)
+- **Description**: The dataset contains 32 columns and 119,390 rows, including information about bookings, hotels, customers, and stays.
 
 ## Project Workflow
-1. **Data Loading**: Load and inspect the dataset.
-2. **EDA**: Analyze the dataset to understand patterns and distributions.
-3. **Feature Engineering**: Create new features to enhance model performance.
-4. **Data Preprocessing**: Handle class imbalance and scale features.
-5. **Model Training**: Train and evaluate multiple machine learning models.
-6. **Model Selection**: Identify the best-performing model based on evaluation metrics.
+1. **Exploratory Data Analysis (EDA)**:
+    - Analyzed the dataset structure, missing values, and class distribution.
+    - Visualized correlations and seasonal trends.
 
-## Tools and Libraries
-- **Python**: Programming language used for the project.
-- **Pandas**: Data manipulation and analysis.
-- **Seaborn & Matplotlib**: Data visualization.
-- **Scikit-learn**: Machine learning models and evaluation metrics.
-- **Imbalanced-learn**: Handling class imbalance using SMOTE.
+2. **Data Preprocessing**:
+    - Handled missing values and outliers.
+    - Balanced the dataset using SMOTE.
+    - Scaled numerical features for consistency.
 
-## How to Run
+3. **Feature Engineering**:
+    - Created new features like `total_guests`, `total_stay`, and `adr_per_person`.
+    - Encoded categorical features using one-hot and frequency encoding.
+
+4. **Model Training and Evaluation**:
+    - Trained Logistic Regression, Random Forest, Gradient Boosting, and Stacking models.
+    - Tuned hyperparameters using GridSearchCV.
+    - Evaluated models using metrics like ROC-AUC, precision, recall, and F1-score.
+
+## Models and Evaluation
+- **Best Model**: Stacking Model
+- **Performance**:
+  - ROC-AUC: 0.9533 (after hyperparameter tuning)
+  - The Stacking Model outperformed other models, combining the strengths of Logistic Regression, Random Forest, and Gradient Boosting.
+
+## Key Insights
+1. **Seasonal Trends**:
+    - Higher cancellations during peak months like June and July.
+    - Stable bookings in off-peak months like November and December.
+
+2. **Key Features**:
+    - `lead_time`, `previous_cancellations`, and `total_of_special_requests` significantly impact cancellations.
+
+3. **Operational Recommendations**:
+    - Implement overbooking strategies during peak months.
+    - Offer promotions to reduce cancellations.
+
+## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/Fraud_Credit_Card.git
+    git clone https://github.com/your-username/hotel-booking-cancellation-prediction.git
+    cd hotel-booking-cancellation-prediction
     ```
-2. Navigate to the project directory:
-    ```bash
-    cd Fraud_Credit_Card
-    ```
-3. Install the required dependencies:
+2. Install the required dependencies:
     ```bash
     pip install -r requirements.txt
     ```
-4. Open the Jupyter Notebook:
+
+## Usage
+1. Run the Jupyter Notebook to explore the analysis and train models:
     ```bash
     jupyter notebook
     ```
-5. Run the cells sequentially to reproduce the analysis and results.
+2. Use the trained model for predictions:
+    - Load the model and input new booking data for predictions.
 
-## Dataset
-The dataset used in this project is publicly available and contains anonymized credit card transaction data. It includes 31 features:
-- **Time**: Seconds elapsed between the transaction and the first transaction in the dataset.
-- **Amount**: Transaction amount.
-- **Class**: Target variable (1 for fraud, 0 for non-fraud).
-- **V1-V28**: Principal components obtained using PCA.
-
-## Conclusion
-The project demonstrates the importance of handling class imbalance and the effectiveness of ensemble methods like Random Forest in fraud detection tasks. The Random Forest model was identified as the most reliable model for detecting fraudulent transactions.
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
